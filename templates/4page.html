@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>전국유기견보호센터 정보검색</title>
+
+    <meta property="og:title" content="전국유기견보호센터 정보검색"/>
+    <meta property="og:description" content="센터정보를 손쉽게 찾고, 후기까지"/>
+    <meta property="og:image" content="{{ url_for('static', filename='ogimage.png') }}"/>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <style>
+        .inner {
+            width: 1000px;
+            margin: 0 auto;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 30px;
+            margin-right: 200px;
+
+        }
+
+        .nav .item {
+            margin-right: 8px;
+        }
+
+        #form {
+            display: none;
+        }
+
+        .submit {
+            margin-top: 120px;
+        }
+
+        .review {
+            margin-top: 10px;
+        }
+
+        .form {
+            margin: 30px auto 50px;
+            width: 600px;
+
+        }
+
+        .description {
+            /*white-space: nowrap;*/
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* 라인수 */
+            -webkit-box-orient: vertical;
+            word-wrap: break-word;
+            line-height: 1.2em;
+            height: 2.4em;
+        }
+
+        #description {
+
+        }
+
+        .review-title {
+            display: flex;
+            align-items: baseline;
+        }
+
+        .card-title {
+            margin-right: 8px;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            showList();
+        });
+
+        function openClose() {
+            if ($("#form").css("display") == "block") {
+                $("#form").hide();
+            } else {
+                $("#form").show();
+            }
+        }
+
+        function more() {
+            if ($(".description").is(':visible') == true) {
+                $("#description").removeClass('description')
+                $("#more_openClose").text("닫기");
+            } else {
+                $("#description").addClass('description');
+                $("#more_openClose").text("전체글 보기");
+            }
+
+        }
+
+        function makeList() {
+            let nickname = $('#nickname').val()
+            let title = $('#title').val()
+            let comment = $('#comment').val()
+
+            $.ajax({
+                type: "POST",
+                url: "/review",
+                data: {nickname_give: nickname, title_give: title, comment_give: comment},
+                success: function (response) {
+                    alert(response["msg"]);
+                    window.location.reload();
+                }
+            })
+        }
+
+        function showList() {
+            $.ajax({
+                type: "GET",
+                url: "/review",
+                data: {},
+                success: function (response) {
+                    let reviews = response['all_reviews']
+                    for (let i = 0; i < reviews.length; i++) {
+                        let nickname = reviews[i]['nickname']
+                        let title = reviews[i]['title']
+                        let comment = reviews[i]['comment']
+
+                        let temp_html = `<div class="card review" style="max-width: 1200px;">
+                                                <div class="card-body">
+                                                    <div class="review-title">
+                                                        <h5 class="card-title">${title}</h5>
+                                                        <h6 class="card-subtitle mb-2 text-muted name">by ${nickname}</h6>
+                                                    </div>
+
+                                                    <p id="description" class="card-text description">${comment}</p>
+                                                    <a href="#" id="more_openClose" onclick="more()" class="card-link more">전체글 보기</a>
+                                                    </div>
+                                          </div>
+                            `
+
+                        $('#list').append(temp_html)
+                    }
+                }
+
+            })
+        }
+
+    </script>
+</head>
+<body>
+<div class="nav">
+    <button type="button" class="btn item btn-outline-secondary">유기견 보호센터 찾기</button>
+    <button type="button" class="btn item btn-outline-secondary">유기견 공고 조회</button>
+    <button type="button" class="btn item btn-outline-secondary">블로그</button>
+    <button type="button" class="btn item btn-outline-secondary">정보 공유</button>
+</div>
+<div class="inner">
+    <button type="button" onclick="openClose()" class="btn submit btn-primary">후기작성</button>
+
+    <div id="form" class="form">
+        <div class="mb-3">
+            <label class="form-label">작성자</label>
+            <input id="nickname" type="email" class="form-control"
+                   placeholder="별칭을 입력하세요.">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">제목</label>
+            <input id="title" type="title" class="form-control"
+                   placeholder="30자 이내로 입력하세요.">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">review</label>
+            <textarea id="comment" class="form-control" rows="3"></textarea>
+        </div>
+        <button onclick="makeList()" type="button" class="btn upload btn-primary">등록</button>
+    </div>
+
+    <div id="list">
+<!--        후기추가될부분-->
+    </div>
+
+
+</div>
+
+
+</body>
+</html>
