@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>꺄르르마켓_브랜드 아동복 원페이지 쇼핑몰</title>
+
+    <meta property="og:title" content="꺄르르마켓"/>
+    <meta property="og:description" content="백엔드까지 작업한 첫 결과물!"/>
+    <meta property="og:image" content="{{ url_for('static', filename='ogimage.png') }}"/>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script>
+
+    </script>
+    <style>
+        .inner {
+            width: 1000px;
+            margin: 0 auto;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 30px;
+            margin-right: 200px;
+
+        }
+
+        .nav .item {
+            margin-right: 8px;
+        }
+
+        .blog:first-child {
+            margin-top: 130px;
+        }
+
+        .description {
+            /*white-space: nowrap;*/
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* 라인수 */
+            -webkit-box-orient: vertical;
+            word-wrap: break-word;
+            line-height: 1.2em;
+            height: 2.4em;
+        }
+    </style>
+</head>
+<body>
+<div class="nav">
+    <button type="button" class="btn item btn-outline-secondary">유기견 보호센터 찾기</button>
+    <button type="button" class="btn item btn-outline-secondary">유기견 공고 조회</button>
+    <button type="button" class="btn item btn-outline-secondary">블로그</button>
+    <button type="button" class="btn item btn-outline-secondary">정보 공유</button>
+</div>
+<div class="inner">
+    <div class="card blog mb-3" style="max-width: 1200px;">
+        <div class="row g-0">
+            <div class="col-md-2">
+                <img src="../static/images/blog_1.png" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-10">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">유기견보호소 그저 사랑스럽네요</h5>
+                    <h6 class="card-subtitle mb-2 text-muted publisher">published by AND U</h6>
+                    <p class="card-text description">예전에는 유기견이라고하면 안쓰러운 얼굴과 좋지 않은 상태, 아픈 몸 등의 이미지로만 생각했어요. 그런데 관리가 잘 되고
+                        있는 유기견보호소를 보니 꼭 그렇지 많은 않다는 것을 알게 되었어요. 예전에는 유기견이라고하면 안쓰러운 얼굴과 좋지 않은 상태, 아픈 몸 등의 이미지로만 생각했어요. 그런데
+                        관리가 잘 되고 있는 유기견보호소를 보니 꼭 그렇지 많은 않다는 것을 알게 되었어요.</p>
+                    <p class="card-text date"><small class="text-muted">2021.06.01</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card blog mb-3" style="max-width: 1200px;">
+        <div class="row g-0">
+            <div class="col-md-2">
+                <img src="../static/images/blog_1.png" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-10">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">유기견보호소 그저 사랑스럽네요</h5>
+                    <h6 class="card-subtitle mb-2 text-muted publisher">published by AND U</h6>
+                    <p class="card-text description">예전에는 유기견이라고하면 안쓰러운 얼굴과 좋지 않은 상태, 아픈 몸 등의 이미지로만 생각했어요. 그런데 관리가 잘 되고
+                        있는 유기견보호소를 보니 꼭 그렇지 많은 않다는 것을 알게 되었어요. 예전에는 유기견이라고하면 안쓰러운 얼굴과 좋지 않은 상태, 아픈 몸 등의 이미지로만 생각했어요. 그런데
+                        관리가 잘 되고 있는 유기견보호소를 보니 꼭 그렇지 많은 않다는 것을 알게 되었어요.</p>
+                    <p class="card-text date"><small class="text-muted">2021.06.01</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card blog mb-3" style="max-width: 1200px;">
+        <div class="row g-0">
+            <div class="col-md-2">
+                <img src="../static/images/blog_1.png" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-10">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">유기견보호소 그저 사랑스럽네요</h5>
+                    <h6 class="card-subtitle mb-2 text-muted publisher">published by AND U</h6>
+                    <p class="card-text description">예전에는 유기견이라고하면 안쓰러운 얼굴과 좋지 않은 상태, 아픈 몸 등의 이미지로만 생각했어요. 그런데 관리가 잘 되고
+                        있는 유기견보호소를 보니 꼭 그렇지 많은 않다는 것을 알게 되었어요. 예전에는 유기견이라고하면 안쓰러운 얼굴과 좋지 않은 상태, 아픈 몸 등의 이미지로만 생각했어요. 그런데
+                        관리가 잘 되고 있는 유기견보호소를 보니 꼭 그렇지 많은 않다는 것을 알게 되었어요.</p>
+                    <p class="card-text date"><small class="text-muted">2021.06.01</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card blog mb-3" style="max-width: 1200px;">
+        <div class="row g-0">
+            <div class="col-md-2">
+                <img src="../static/images/blog_1.png" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-10">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">유기견보호소 그저 사랑스럽네요</h5>
+                    <h6 class="card-subtitle mb-2 text-muted publisher">published by AND U</h6>
+                    <p class="card-text description">예전에는 유기견이라고하면 안쓰러운 얼굴과 좋지 않은 상태, 아픈 몸 등의 이미지로만 생각했어요. 그런데 관리가 잘 되고
+                        있는 유기견보호소를 보니 꼭 그렇지 많은 않다는 것을 알게 되었어요. 예전에는 유기견이라고하면 안쓰러운 얼굴과 좋지 않은 상태, 아픈 몸 등의 이미지로만 생각했어요. 그런데
+                        관리가 잘 되고 있는 유기견보호소를 보니 꼭 그렇지 많은 않다는 것을 알게 되었어요.</p>
+                    <p class="card-text date"><small class="text-muted">2021.06.01</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
