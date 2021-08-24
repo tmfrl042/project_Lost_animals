@@ -5,14 +5,11 @@ import json
 from pymongo import MongoClient
 from flask import Flask, render_template, jsonify, request
 
-
 app = Flask(__name__)
 
-
 client = MongoClient('localhost', 27017)
-db = client.project10
+db = client.animalLost
 
-"""
 db.bohocenter.remove({})
 
 # 내가 받은 인증키
@@ -68,7 +65,6 @@ for i in range(1, pageNum-2):
 
     print(str(i)+"페이지db에저장성공")
 
-"""
 # HTML 화면 보여주기
 @app.route('/')
 def home():
