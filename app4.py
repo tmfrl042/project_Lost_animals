@@ -25,11 +25,13 @@ def saving():
     nickname_receive = request.form['nickname_give']
     title_receive = request.form['title_give']
     comment_receive = request.form['comment_give']
+    password_receive = requests.form['password_give']
 
     doc = {
         'nickname': nickname_receive,
         'title': title_receive,
-        'comment': comment_receive
+        'comment': comment_receive,
+        'password': password_receive
     }
     db.reviews.insert_one(doc)
 

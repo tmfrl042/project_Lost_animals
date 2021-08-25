@@ -77,7 +77,27 @@
         }
 
         #description {
+            line-height: 1.2em;
+        }
 
+        .btnGroup {
+            display: flex;
+        }
+
+        .btn-more, .btn-modify {
+            margin-right: 5px;
+        }
+
+        .btn-delete {
+            margin-right: 30px;
+        }
+
+        #pw_confirm {
+            display: none;
+        }
+
+        .col-auto {
+            margin-left: -15px;
         }
 
         .review-title {
@@ -97,12 +117,15 @@
         function openClose() {
             if ($("#form").css("display") == "block") {
                 $("#form").hide();
+                $(".submit").text('후기작성');
+
             } else {
                 $("#form").show();
+                $(".submit").text('접어두기');
             }
         }
 
-        function more() {
+        function reviewMore() {
             if ($(".description").is(':visible') == true) {
                 $("#description").removeClass('description')
                 $("#more_openClose").text("닫기");
@@ -117,11 +140,12 @@
             let nickname = $('#nickname').val()
             let title = $('#title').val()
             let comment = $('#comment').val()
+            let password = $('#password').val()
 
             $.ajax({
                 type: "POST",
                 url: "/review",
-                data: {nickname_give: nickname, title_give: title, comment_give: comment},
+                data: {nickname_give: nickname, title_give: title, comment_give: comment, password_give: password},
                 success: function (response) {
                     alert(response["msg"]);
                     window.location.reload();
@@ -140,6 +164,7 @@
                         let nickname = reviews[i]['nickname']
                         let title = reviews[i]['title']
                         let comment = reviews[i]['comment']
+                        let password = reviews[i]['password']
 
                         let temp_html = `<div class="card review" style="max-width: 1200px;">
                                                 <div class="card-body">
@@ -149,8 +174,24 @@
                                                     </div>
 
                                                     <p id="description" class="card-text description">${comment}</p>
-                                                    <a href="#" id="more_openClose" onclick="more()" class="card-link more">전체글 보기</a>
+                                                    <div class="btnGroup d-flex align-items-center">
+                                                        <button id="more_openClose" onclick="reviewMore()" class="btn btn-more btn-light">전체글 보기</a>
+                                                        <button type="button" onclick="reviewModify()" class="btn btn-modify btn-light">수정</button>
+                                                        <button type="button" onclick="reviewDelete()" class="btn btn-delete btn-light">삭제</button>
+                                                        <div id="pw_confirm">
+                                                          <div class="p-2">
+                                                            <label class="col-form-label">비밀번호</label>
+                                                          </div>
+                                                          <div class="p-2">
+                                                            <input type="password" class="form-control" aria-describedby="passwordHelpInline">
+                                                          </div>
+                                                          <div class="p-2">
+                                                            <button type="button" onclick="passwordConfirm()" class="btn btn-confirm btn-secondary">확인</button>
+                                                          </div>
+                                                        </div>
                                                     </div>
+
+                                                </div>
                                           </div>
                             `
 
@@ -160,6 +201,36 @@
 
             })
         }
+
+        function reviewDelete() {
+            if ($("#pw_confirm").is(':visible') == true) {
+                $("#pw_confirm").hide();
+                $("#pw_confirm").removeClass('d-flex')
+            } else {
+                $("#pw_confirm").show();
+                $("#pw_confirm").addClass('d-flex')
+            }
+        }
+
+        // function passwordConfirm() {
+        //     $.ajax({
+        //         type: "GET",
+        //         url: "/password",
+        //         data: {},
+        //         success: function (response) {
+        //             let reviews = response['all_reviews']
+        //             for (let i = 0; i < reviews.length; i++) {
+        //                 let password = reviews[i]['password']
+        //
+        //                 if() {
+        //
+        //                 } else {
+        //
+        //                 }
+        //             }
+        //         }
+        //     })
+        // }
 
     </script>
 </head>
@@ -188,11 +259,15 @@
             <label class="form-label">review</label>
             <textarea id="comment" class="form-control" rows="3"></textarea>
         </div>
+        <div class="mb-3">
+            <label class="form-label">비밀번호를 입력하세요. 비밀번호는 작성된 후기를 수정 혹은 삭제할 때 사용됩니다.</label>
+            <input type="password" class="form-control" id="password">
+        </div>
         <button onclick="makeList()" type="button" class="btn upload btn-primary">등록</button>
     </div>
 
     <div id="list">
-<!--        후기추가될부분-->
+        <!--        후기추가될부분-->
     </div>
 
 
