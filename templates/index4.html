@@ -161,6 +161,7 @@
                 success: function (response) {
                     let reviews = response['all_reviews']
                     for (let i = 0; i < reviews.length; i++) {
+                        let id = reviews[i]['id']
                         let nickname = reviews[i]['nickname']
                         let title = reviews[i]['title']
                         let comment = reviews[i]['comment']
@@ -176,17 +177,17 @@
                                                     <p id="description" class="card-text description">${comment}</p>
                                                     <div class="btnGroup d-flex align-items-center">
                                                         <button id="more_openClose" onclick="reviewMore()" class="btn btn-more btn-light">전체글 보기</a>
-                                                        <button type="button" onclick="reviewModify()" class="btn btn-modify btn-light">수정</button>
-                                                        <button type="button" onclick="reviewDelete()" class="btn btn-delete btn-light">삭제</button>
+                                                        <button type="button" onclick="reviewUpdate('modify','${id}')" class="btn btn-modify btn-light">수정</button>
+                                                        <button type="button" onclick="reviewUpdate('delete','${id}')" class="btn btn-delete btn-light">삭제</button>
                                                         <div id="pw_confirm">
                                                           <div class="p-2">
                                                             <label class="col-form-label">비밀번호</label>
                                                           </div>
                                                           <div class="p-2">
-                                                            <input type="password" class="form-control" aria-describedby="passwordHelpInline">
+                                                            <input type="password" id="pwd_confirm" class="form-control" aria-describedby="passwordHelpInline">
                                                           </div>
                                                           <div class="p-2">
-                                                            <button type="button" onclick="passwordConfirm()" class="btn btn-confirm btn-secondary">확인</button>
+                                                            <button type="button" id="pw_confirm_btn" class="btn btn-confirm btn-secondary">확인</button>
                                                           </div>
                                                         </div>
                                                     </div>
@@ -202,7 +203,8 @@
             })
         }
 
-        function reviewDelete() {
+        function reviewUpdate(type, id) {
+            let targetUrl;
             if ($("#pw_confirm").is(':visible') == true) {
                 $("#pw_confirm").hide();
                 $("#pw_confirm").removeClass('d-flex')
@@ -210,27 +212,35 @@
                 $("#pw_confirm").show();
                 $("#pw_confirm").addClass('d-flex')
             }
+            if (type == "modify"){
+                 alert('이건 '+ id+' 수정')
+                targetUrl = "/update"
+            }
+            else if (type == "delete"){
+                alert('이건 '+ id+' 삭제')
+                targetUrl = "/delete"
+
+            }
+
+            $("#pw_confirm_btn").click(function (){
+                reviewUpdateTransac(id, targetUrl)
+            })
         }
 
-        // function passwordConfirm() {
-        //     $.ajax({
-        //         type: "GET",
-        //         url: "/password",
-        //         data: {},
-        //         success: function (response) {
-        //             let reviews = response['all_reviews']
-        //             for (let i = 0; i < reviews.length; i++) {
-        //                 let password = reviews[i]['password']
-        //
-        //                 if() {
-        //
-        //                 } else {
-        //
-        //                 }
-        //             }
-        //         }
-        //     })
-        // }
+        function reviewUpdateTransac(id, targetUrl){
+            let password = $('#pwd_confirm').val()
+             $.ajax({
+                type: "POST",
+                url: targetUrl,
+                data: {id_give: id, password_give: password},
+                success: function (response) {
+                    alert(response["msg"]);
+                    window.location.reload();
+                }
+            })
+        }
+
+
 
     </script>
 </head>
