@@ -16,8 +16,30 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Stylish&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
+        body {
+            font-family: 'IBM Plex Sans KR', sans-serif;
+            font-weight: 300;
+            font-size: 15px;
+        }
+
+        body::after {
+            width: 100%;
+            height: 100vh;
+            content: "";
+            background-image: url("../static/images/check2.jpeg");
+            background-size: contain;
+            background-repeat: repeat;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
         .nav {
             display: flex;
             justify-content: flex-end;
@@ -30,7 +52,7 @@
         }
         .row{
             width: 1000px;
-            margin: 100px auto;
+            margin: auto;
         }
 
         .card {
@@ -38,155 +60,83 @@
             padding: 8px;
             margin-bottom: 8px;
         }
+
         .card-text {
             margin-bottom: 5px;
         }
+
+        .card-title {
+            font-weight: 500;
+        }
+
+        img {
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .title-box {
+            display: block;
+            margin: 80px auto 60px auto;
+            text-align: center;
+            /*width: 320px;*/
+        }
     </style>
     <script>
-        // function show {
-        //     $.ajax({
-        //     type: "GET",
-        //     url: " URL ",
-        //     data: {},
-        //     success: function (response) {
-        //         console.log(response)
-        //     }
-        // })
-        // }
+        $(document).ready(function () {
+            showDogs();
+        });
 
+        function showDogs() {
+            // 서버의 데이터 받아오기 (이미지경로,공고고유번호,품종,체중,발견장소,공고시작일자,종료일자)
+            $.ajax({
+                type: 'GET',
+                url: '/dogs',
+                data: {},
+                success: function (response) {
+                    let dogs = response['dogs_notices']
+                    for (let i = 0; i < dogs.length; i++) {
+                        let image = dogs[i]['IMAGE_COURS']
+                        let number = dogs[i]['PBLANC_IDNTFY_NO']
+                        let breed = dogs[i]['SPECIES_NM']
+                        let weight = dogs[i]['BDWGH_INFO']
+                        let discovery = dogs[i]['DISCVRY_PLC_INFO']
+                        let start = dogs[i]['PBLANC_BEGIN_DE']
+                        let end = dogs[i]['PBLANC_END_DE']
+
+                        let temp_html = `<div class="card">
+                                            <img src="${image}"
+                                                 class="card-img-top" alt="...">
+                                            <div class="card-body">
+                                                <a href="###" class="card-title">${number}</a>
+                                                <hr>
+                                                <p class="card-text"><span style="color: gray">품종</span> ${breed}</p>
+                                                <p class="card-text"><span style="color: gray">체중</span> ${weight}</p>
+                                                <p class="card-text"><span style="color: gray">발견</span> ${discovery}</p>
+                                                <p class="card-text"><small class="text-muted">${start}~${end}</small></p>
+                                            </div>
+                                        </div>`
+                        $('#dogs-list').append(temp_html)
+                    }
+                }
+            })
+        }
     </script>
 </head>
 <body>
     <div class="nav">
         <button type="button" class
-                ="btn item btn-outline-secondary">유기견 보호센터 찾기
+                ="btn item btn-outline-dark">유기견 보호센터 찾기
         </button>
-        <button type="button" class="btn item btn-outline-secondary">유기견 공고 조회</button>
-        <button type="button" class="btn item btn-outline-secondary">블로그</button>
-        <button type="button" class="btn item btn-outline-secondary">정보 공유</button>
+        <button type="button" class="btn item btn-outline-warning">유기견 공고 조회</button>
+        <button type="button" class="btn item btn-warning">블로그</button>
+        <button type="button" class="btn item btn-dark">정보 공유</button>
     </div>
 
-    <div class="row row-cols-4 row-cols-md-2 g-4 ">
-        <div class="card">
-            <img src="https://www.animal.go.kr/front/fileMng/imageView.do?f=/files/shelter/2021/08/202108181608480.jpg"
-                 class="card-img-top" alt="...">
-            <div class="card-body">
-                <a href="###" class="card-title" style="font-weight: bold">전북-임실-2021-00106</a>
-                <hr>
-                <p class="card-text"><span style="color: gray">품종</span> 믹스견, 암컷</p>
-                <p class="card-text"><span style="color: gray">체중</span> 15kg</p>
-                <p class="card-text"><span style="color: gray">발견</span> 임실군 정월리</p>
-                <p class="card-text"><small class="text-muted">2021.08.18~2021.09.02</small></p>
-            </div>
-        </div>
-        <div class="card">
-            <img src="https://www.animal.go.kr/front/fileMng/imageView.do?f=/files/shelter/2021/08/202108181608480.jpg"
-                 class="card-img-top" alt="...">
-            <div class="card-body">
-                <a href="###" class="card-title" style="font-weight: bold">전북-임실-2021-00106</a>
-                <hr>
-                <p class="card-text"><span style="color: gray">품종</span> 믹스견, 암컷</p>
-                <p class="card-text"><span style="color: gray">체중</span> 15kg</p>
-                <p class="card-text"><span style="color: gray">발견</span> 임실군 정월리</p>
-                <p class="card-text"><small class="text-muted">2021.08.18~2021.09.02</small></p>
-            </div>
-        </div>
-        <div class="card">
-            <img src="https://www.animal.go.kr/front/fileMng/imageView.do?f=/files/shelter/2021/08/202108181608480.jpg"
-                 class="card-img-top" alt="...">
-            <div class="card-body">
-                <a href="###" class="card-title" style="font-weight: bold">전북-임실-2021-00106</a>
-                <hr>
-                <p class="card-text"><span style="color: gray">품종</span> 믹스견, 암컷</p>
-                <p class="card-text"><span style="color: gray">체중</span> 15kg</p>
-                <p class="card-text"><span style="color: gray">발견</span> 임실군 정월리</p>
-                <p class="card-text"><small class="text-muted">2021.08.18~2021.09.02</small></p>
-            </div>
-        </div>
-        <div class="card">
-            <img src="https://www.animal.go.kr/front/fileMng/imageView.do?f=/files/shelter/2021/08/202108181608480.jpg"
-                 class="card-img-top" alt="...">
-            <div class="card-body">
-                <a href="###" class="card-title" style="font-weight: bold">전북-임실-2021-00106</a>
-                <hr>
-                <p class="card-text"><span style="color: gray">품종</span> 믹스견, 암컷</p>
-                <p class="card-text"><span style="color: gray">체중</span> 15kg</p>
-                <p class="card-text"><span style="color: gray">발견</span> 임실군 정월리</p>
-                <p class="card-text"><small class="text-muted">2021.08.18~2021.09.02</small></p>
-            </div>
-        </div>
-        <div class="card">
-            <img src="https://www.animal.go.kr/front/fileMng/imageView.do?f=/files/shelter/2021/08/202108181608480.jpg"
-                 class="card-img-top" alt="...">
-            <div class="card-body">
-                <a href="###" class="card-title" style="font-weight: bold">전북-임실-2021-00106</a>
-                <hr>
-                <p class="card-text"><span style="color: gray">품종</span> 믹스견, 암컷</p>
-                <p class="card-text"><span style="color: gray">체중</span> 15kg</p>
-                <p class="card-text"><span style="color: gray">발견</span> 임실군 정월리</p>
-                <p class="card-text"><small class="text-muted">2021.08.18~2021.09.02</small></p>
-            </div>
-        </div>
-        <div class="card">
-            <img src="https://www.animal.go.kr/front/fileMng/imageView.do?f=/files/shelter/2021/08/202108181608480.jpg"
-                 class="card-img-top" alt="...">
-            <div class="card-body">
-                <a href="###" class="card-title" style="font-weight: bold">전북-임실-2021-00106</a>
-                <hr>
-                <p class="card-text"><span style="color: gray">품종</span> 믹스견, 암컷</p>
-                <p class="card-text"><span style="color: gray">체중</span> 15kg</p>
-                <p class="card-text"><span style="color: gray">발견</span> 임실군 정월리</p>
-                <p class="card-text"><small class="text-muted">2021.08.18~2021.09.02</small></p>
-            </div>
-        </div>
-        <div class="card">
-            <img src="https://www.animal.go.kr/front/fileMng/imageView.do?f=/files/shelter/2021/08/202108181608480.jpg"
-                 class="card-img-top" alt="...">
-            <div class="card-body">
-                <a href="###" class="card-title" style="font-weight: bold">전북-임실-2021-00106</a>
-                <hr>
-                <p class="card-text"><span style="color: gray">품종</span> 믹스견, 암컷</p>
-                <p class="card-text"><span style="color: gray">체중</span> 15kg</p>
-                <p class="card-text"><span style="color: gray">발견</span> 임실군 정월리</p>
-                <p class="card-text"><small class="text-muted">2021.08.18~2021.09.02</small></p>
-            </div>
-        </div>
-        <div class="card">
-            <img src="https://www.animal.go.kr/front/fileMng/imageView.do?f=/files/shelter/2021/08/202108181608480.jpg"
-                 class="card-img-top" alt="...">
-            <div class="card-body">
-                <a href="###" class="card-title" style="font-weight: bold">전북-임실-2021-00106</a>
-                <hr>
-                <p class="card-text"><span style="color: gray">품종</span> 믹스견, 암컷</p>
-                <p class="card-text"><span style="color: gray">체중</span> 15kg</p>
-                <p class="card-text"><span style="color: gray">발견</span> 임실군 정월리</p>
-                <p class="card-text"><small class="text-muted">2021.08.18~2021.09.02</small></p>
-            </div>
-        </div>
-        <div class="card">
-            <img src="https://www.animal.go.kr/front/fileMng/imageView.do?f=/files/shelter/2021/08/202108181608480.jpg"
-                 class="card-img-top" alt="...">
-            <div class="card-body">
-                <a href="###" class="card-title" style="font-weight: bold">전북-임실-2021-00106</a>
-                <hr>
-                <p class="card-text"><span style="color: gray">품종</span> 믹스견, 암컷</p>
-                <p class="card-text"><span style="color: gray">체중</span> 15kg</p>
-                <p class="card-text"><span style="color: gray">발견</span> 임실군 정월리</p>
-                <p class="card-text"><small class="text-muted">2021.08.18~2021.09.02</small></p>
-            </div>
-        </div>
-        <div class="card">
-            <img src="https://www.animal.go.kr/front/fileMng/imageView.do?f=/files/shelter/2021/08/202108181608480.jpg"
-                 class="card-img-top" alt="...">
-            <div class="card-body">
-                <a href="###" class="card-title" style="font-weight: bold">전북-임실-2021-00106</a>
-                <hr>
-                <p class="card-text"><span style="color: gray">품종</span> 믹스견, 암컷</p>
-                <p class="card-text"><span style="color: gray">체중</span> 15kg</p>
-                <p class="card-text"><span style="color: gray">발견</span> 임실군 정월리</p>
-                <p class="card-text"><small class="text-muted">2021.08.18~2021.09.02</small></p>
-            </div>
-        </div>
+    <div class="title-box">
+        <img class="img-title" src="../static/images/title2-3.png" style="height: 180px;">
+    </div>
+
+    <div class="row row-cols-4 row-cols-md-2 g-4" id="dogs-list">
     </div>
 
 </body>
