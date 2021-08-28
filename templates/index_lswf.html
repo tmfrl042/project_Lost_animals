@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>꺄르르마켓_브랜드 아동복 원페이지 쇼핑몰</title>
+
+    <meta property="og:title" content="꺄르르마켓"/>
+    <meta property="og:description" content="백엔드까지 작업한 첫 결과물!"/>
+    <meta property="og:image" content="{{ url_for('static', filename='ogimage.png') }}"/>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script>
+                $(document).ready(function () {
+            showBlog();
+        });
+
+        function showBlog() {
+            $.ajax({
+                type: 'GET',
+                url: '/blog',
+                data: {},
+                success: function (response) {
+                    let blogs = response['blog_texts']
+                    for (let i = 0; i < blogs.length; i++) {
+                        let title = blogs[i]['title']
+                        let url=blogs[i]['url']
+                        let writer = blogs[i]['writer']
+                        let content = blogs[i]['content']
+                        let date = blogs[i]['date']
+                        let img_url = blogs[i]['img_url']
+                        let temp_html=`<div class="card blog mb-3" style="max-width: 1200px;">
+        <div class="row g-0">
+            <div class="col-md-2">
+                <img src=${img_url} class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-10">
+                <div class="card-body">
+                    <a href="${url}"><h5 class="card-title text-primary hrefs">${title}</h5></a>
+                    <h6 class="card-subtitle mb-2 text-muted publisher">published by ${writer}</h6>
+                    <a href="${url}"><p class="card-text description hrefs">${content}</p></a>
+                    <p class="card-text date"><small class="text-muted">${date}</small></p>
+                </div>
+            </div>
+        </div>
+    </div>`
+$('.inner').append(temp_html)
+                    }
+
+                }
+
+            })
+        }
+    </script>
+    <style>
+        .inner {
+            width: 1000px;
+            margin: 0 auto;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 30px;
+            margin-right: 200px;
+
+        }
+
+        .nav .item {
+            margin-right: 8px;
+        }
+
+        .blog:first-child {
+            margin-top: 130px;
+        }
+
+        .description {
+            /*white-space: nowrap;*/
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* 라인수 */
+            -webkit-box-orient: vertical;
+            word-wrap: break-word;
+            line-height: 1.2em;
+            height: 2.4em;
+        }
+        .imgs{
+            height: 159.6px;
+            width: 150px;
+            background-size: cover;
+            background-position:center;
+        }
+
+.hrefs{
+  color: black;
+  text-decoration: none;
+    text-underline: none;
+}
+    </style>
+</head>
+<body>
+<div class="nav">
+    <button type="button" class="btn item btn-outline-secondary">유기견 보호센터 찾기</button>
+    <button type="button" class="btn item btn-outline-secondary">유기견 공고 조회</button>
+    <button type="button" class="btn item btn-outline-secondary">블로그</button>
+    <button type="button" class="btn item btn-outline-secondary">정보 공유</button>
+</div>
+<div class="inner">
+{#    <div class="card blog mb-3" style="max-width: 1200px;">#}
+{#        <div class="row g-0">#}
+{#            <div class="col-md-2">#}
+{#                <img class="imgs" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAxMDdfMTg1%2FMDAxNjA5OTk4MzUxNDI2.LNG3kDPr9iQK7GTIyGJq5mwJPstMgadulG1eynR_cfYg.3IsUDYyqljUVtiYFdEysY1nD_aY7gp1iwU7q9L2a9Mgg.JPEG.lovedud0508%2FIMG_7038.jpg&type=a340" alt="...">#}
+{#            </div>#}
+{#            <div class="col-md-10">#}
+{#                <div class="card-body">#}
+{#                    <a class="hrefs"  href="${url}" ><h5 class="card-title text-primary hrefs">${title}</h5></a>#}
+{#                    <h6 class="card-subtitle mb-2 text-muted publisher">published by ${writer}</h6>#}
+{#                    <a class="hrefs" href="${url}"><p class="card-text description">${content}</p></a>#}
+{#                    <p class="card-text date"><small class="text-muted">${date}</small></p>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+</div>
+
+
+</body>
+</html>
