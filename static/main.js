@@ -123,7 +123,7 @@ function showDogs() {
                 let temp_html = `<div class="card">
                                      <img src="${image}" class="card-img-top" alt="...">
                                             <div class="card-body">
-                                                <a href="###" class="card-title">${number}</a>
+                                                <a href="###" class="card-title2">${number}</a>
                                                 <hr>
                                                 <p class="card-text"><span style="color: gray">품종</span> ${breed}</p>
                                                 <p class="card-text"><span style="color: gray">체중</span> ${weight}</p>
@@ -248,7 +248,7 @@ function showList() {
                                                  <input type="password" id="pwd_confirm" class="form-control" aria-describedby="passwordHelpInline">
                                              </div>
                                              <div class="p-2">
-                                                 <button type="button" id="pw_confirm_btn" class="btn btn-confirm btn-secondary">확인</button>
+                                                 <button type="button" id="pw_confirm_btn" class="btn btn-confirm btn-warning">확인</button>
                                              </div>
                                          </div>
                                       </div>

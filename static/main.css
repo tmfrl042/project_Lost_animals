@@ -38,6 +38,11 @@ body::after {
 .btn-nav.acv{
 }
 
+.title-box {
+    display: block;
+    margin: 80px auto 60px auto;
+    text-align: center;
+}
 
 /*nav1-content*/
 .region {
@@ -51,6 +56,21 @@ body::after {
     margin-right: 8px;
 }
 
+.form-group {
+    margin-bottom: 0;
+}
+
+.submit {
+    width: 70px;
+    height: 36px;
+    margin: 0 15px 0 15px;
+}
+
+.title-box1 {
+    display: block;
+    margin: 80px auto 60px auto;
+    text-align: center;
+}
 
 /*nav2-content*/
 .row {
@@ -63,13 +83,21 @@ img {
     object-fit: cover;
 }
 
-.title-box {
-    display: block;
-    margin: 80px auto 60px auto;
-    text-align: center;
-    /*width: 320px;*/
+.card {
+    width: 250px;
+    padding: 8px;
+    margin-bottom: 8px;
 }
 
+.card-text {
+    margin-bottom: 5px;
+    font-weight: 400;
+}
+
+.card-title2 {
+    font-weight: 500;
+    font-size: 16px;
+}
 
 /*nav3-content*/
 .blog:first-child {
@@ -100,11 +128,12 @@ img {
 }
 
 .btn-submit {
-    margin-top: 120px;
+    margin-top: 10px;
 }
 
 .written-review {
     margin-top: 10px;
+    width: 100%;
 }
 
 .card-title {
@@ -130,6 +159,10 @@ img {
 
 .btn-delete {
     margin-right: 30px;
+}
+
+.form-label {
+    font-weight: 500;
 }
 
 #pw_confirm {

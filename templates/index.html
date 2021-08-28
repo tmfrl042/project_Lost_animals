@@ -33,16 +33,26 @@
 <body>
 <div class="wrap">
     <div class="nav_btn_group">
-        <button rel="nav1" type="button" class="btn btn-nav btn-outline-secondary active">유기견 보호센터 찾기</button>
-        <button rel="nav2" type="button" class="btn btn-nav btn-outline-secondary">유기견 공고 조회</button>
-        <button rel="nav3" type="button" class="btn btn-nav btn-outline-secondary">블로그</button>
-        <button rel="nav4" type="button" class="btn btn-nav btn-outline-secondary">정보 공유</button>
+        <button rel="nav1" type="button" class="btn btn-nav btn-outline-dark active">유기견 보호센터 찾기</button>
+        <button rel="nav2" type="button" class="btn btn-nav btn-outline-dark">유기견 공고 조회</button>
+        <button rel="nav3" type="button" class="btn btn-nav btn-outline-dark">블로그</button>
+        <button rel="nav4" type="button" class="btn btn-nav btn-outline-dark">정보 공유</button>
     </div>
 
 
+
+
+
     <div class="tab_cont">
+
+
         <div id="nav1" class="nav_content">
             <div class="container">
+
+                <div class="title-box">
+                    <img class="img-title" src="../static/images/title1.png" style="height: 180px;">
+                </div>
+
                 <div class="region">
                     <div class="form-group col-md-4">
                         <select id="input-sido" class="form-control">
@@ -86,7 +96,7 @@
                             <option value="화성시">화성시</option>
                         </select>
                     </div>
-                    <button onclick="showCenter()" type="button" class="btn submit btn-secondary btn-sm">검색</button>
+                    <button onclick="showCenter()" type="button" class="btn submit btn-warning">검색</button>
                 </div>
                 <br>
                 <table class="table table-sm table-hover">
@@ -106,6 +116,11 @@
 
         <div id="nav2" class="nav_content">
             <div class="container">
+
+                <div class="title-box">
+                    <img class="img-title" src="../static/images/title2.png" style="height: 180px;">
+                </div>
+
                 <div class="title-box">
                 </div>
 
@@ -117,6 +132,11 @@
 
         <div id="nav3" class="nav_content">
             <div class="container">
+
+                <div class="title-box">
+                    <img class="img-title" src="../static/images/title3.png" style="height: 180px;">
+                </div>
+
                 <div class="inner">
 
                 </div>
@@ -125,7 +145,12 @@
 
         <div id="nav4" class="nav_content">
             <div class="container">
-                <button type="button" onclick="openClose()" class="btn btn-submit btn-primary">후기작성</button>
+
+                <div class="title-box">
+                    <img class="img-title" src="../static/images/title4.png" style="height: 180px;">
+                </div>
+
+                <button type="button" onclick="openClose()" class="btn btn-submit btn-warning">후기작성</button>
 
                 <div id="review-form" class="review-form">
                     <div class="mb-3">
@@ -146,7 +171,7 @@
                         <label class="form-label">비밀번호를 입력하세요. 비밀번호는 작성된 후기를 수정 혹은 삭제할 때 사용됩니다.</label>
                         <input id="password" type="password" class="form-control">
                     </div>
-                    <button onclick="makeList()" type="button" class="btn upload btn-primary">등록</button>
+                    <button onclick="makeList()" type="button" class="btn upload btn-warning">등록</button>
                 </div>
 
                 <div id="list">
