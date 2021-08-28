@@ -31,119 +31,130 @@
     <script src="{{ url_for('static', filename='main.js') }}"></script>
 </head>
 <body>
-<div class="nav_btn_group">
-    <button id="nav1" type="button" class="btn btn-nav btn-outline-secondary">유기견 보호센터 찾기</button>
-    <button id="nav2" type="button" class="btn btn-nav btn-outline-secondary">유기견 공고 조회</button>
-    <button id="nav3" type="button" class="btn btn-nav btn-outline-secondary">블로그</button>
-    <button id="nav4" type="button" class="btn btn-nav btn-outline-secondary">정보 공유</button>
-</div>
-<div class="nav1_content">
-    <div class="container">
-        <div class="region">
-            <div class="form-group col-md-4">
-                <select id="input-sido" class="form-control">
-                    <option selected>시/도</option>
-                    <option value="경기도">경기도</option>
-                </select>
+<div class="wrap">
+    <div class="nav_btn_group">
+        <button rel="nav1" type="button" class="btn btn-nav btn-outline-secondary active">유기견 보호센터 찾기</button>
+        <button rel="nav2" type="button" class="btn btn-nav btn-outline-secondary">유기견 공고 조회</button>
+        <button rel="nav3" type="button" class="btn btn-nav btn-outline-secondary">블로그</button>
+        <button rel="nav4" type="button" class="btn btn-nav btn-outline-secondary">정보 공유</button>
+    </div>
+
+
+    <div class="tab_cont">
+        <div id="nav1" class="nav_content">
+            <div class="container">
+                <div class="region">
+                    <div class="form-group col-md-4">
+                        <select id="input-sido" class="form-control">
+                            <option selected>시/도</option>
+                            <option value="경기도">경기도</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <select id="input-sigun" class="form-control">
+                            <option selected>시/군/구</option>
+                            <option value="가평군">가평군</option>
+                            <option value="고양시">고양시</option>
+                            <option value="과천시">과천시</option>
+                            <option value="광명시">광명시</option>
+                            <option value="광주시">광주시</option>
+                            <option value="구리시">구리시</option>
+                            <option value="군포시">군포시</option>
+                            <option value="김포시">김포시</option>
+                            <option value="남양주시">남양주시</option>
+                            <option value="동두천시">동두천시</option>
+                            <option value="부천시">부천시</option>
+                            <option value="성남시">성남시</option>
+                            <option value="수원시">수원시</option>
+                            <option value="시흥시">시흥시</option>
+                            <option value="안산시">안산시</option>
+                            <option value="안성시">안성시</option>
+                            <option value="안양시">안양시</option>
+                            <option value="양주시">양주시</option>
+                            <option value="양평군">양평군</option>
+                            <option value="여주시">여주시</option>
+                            <option value="연천군">연천군</option>
+                            <option value="오산시">오산시</option>
+                            <option value="용인시">용인시</option>
+                            <option value="의왕시">의왕시</option>
+                            <option value="의정부시">의정부시</option>
+                            <option value="이천시">이천시</option>
+                            <option value="파주시">파주시</option>
+                            <option value="평택시">평택시</option>
+                            <option value="포천시">포천시</option>
+                            <option value="하남시">하남시</option>
+                            <option value="화성시">화성시</option>
+                        </select>
+                    </div>
+                    <button onclick="showCenter()" type="button" class="btn submit btn-secondary btn-sm">검색</button>
+                </div>
+                <br>
+                <table class="table table-sm table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">관할구역</th>
+                        <th scope="col">보호센터명</th>
+                        <th scope="col">주소</th>
+                        <th scope="col">전화번호</th>
+                    </tr>
+                    </thead>
+                    <tbody id="center-list">
+                    </tbody>
+                </table>
             </div>
-            <div class="form-group col-md-4">
-                <select id="input-sigun" class="form-control">
-                    <option selected>시/군/구</option>
-                    <option value="가평군">가평군</option>
-                    <option value="고양시">고양시</option>
-                    <option value="과천시">과천시</option>
-                    <option value="광명시">광명시</option>
-                    <option>광주시</option>
-                    <option>구리시</option>
-                    <option>군포시</option>
-                    <option>김포시</option>
-                    <option>남양주시</option>
-                    <option>동두천시</option>
-                    <option>부천시</option>
-                    <option>성남시</option>
-                    <option>수원시</option>
-                    <option>시흥시</option>
-                    <option>안산시</option>
-                    <option>안성시</option>
-                    <option>안양시</option>
-                    <option>양주시</option>
-                    <option>양평군</option>
-                    <option>여주시</option>
-                    <option>연천군</option>
-                    <option>오산시</option>
-                    <option>용인시</option>
-                    <option>의왕시</option>
-                    <option>의정부시</option>
-                    <option>이천시</option>
-                    <option>파주시</option>
-                    <option>평택시</option>
-                    <option>포천시</option>
-                    <option>하남시</option>
-                    <option>화성시</option>
-                </select>
-            </div>
-            <button onclick="search()" type="button" class="btn submit btn-secondary btn-sm">검색</button>
         </div>
-        <br>
-        <table class="table table-sm table-hover">
-            <thead>
-            <tr>
-                <th scope="col">관할구역</th>
-                <th scope="col">보호센터명</th>
-                <th scope="col">주소</th>
-                <th scope="col">전화번호</th>
-            </tr>
-            </thead>
-            <tbody id="center-list">
-            </tbody>
-        </table>
+
+        <div id="nav2" class="nav_content">
+            <div class="container">
+                <div class="title-box">
+                </div>
+
+                <div class="row row-cols-4 row-cols-md-2 g-4" id="dogs-list">
+                    <!--리스트들어갈곳-->
+                </div>
+            </div>
+        </div>
+
+        <div id="nav3" class="nav_content">
+            <div class="container">
+                <div class="inner">
+
+                </div>
+            </div>
+        </div>
+
+        <div id="nav4" class="nav_content">
+            <div class="container">
+                <button type="button" onclick="openClose()" class="btn btn-submit btn-primary">후기작성</button>
+
+                <div id="review-form" class="review-form">
+                    <div class="mb-3">
+                        <label class="form-label">작성자</label>
+                        <input id="nickname" type="email" class="form-control"
+                               placeholder="별칭을 입력하세요.">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">제목</label>
+                        <input id="title" type="title" class="form-control"
+                               placeholder="30자 이내로 입력하세요.">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">review</label>
+                        <textarea id="comment" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">비밀번호를 입력하세요. 비밀번호는 작성된 후기를 수정 혹은 삭제할 때 사용됩니다.</label>
+                        <input id="password" type="password" class="form-control">
+                    </div>
+                    <button onclick="makeList()" type="button" class="btn upload btn-primary">등록</button>
+                </div>
+
+                <div id="list">
+                    <!--후기추가될부분-->
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-<div class="nav2_content">
-    <div class="container">
-        <div class="title-box">
-            <img class="img-title" src="../static/images/title2-3.png" style="height: 180px;">
-        </div>
-
-        <div class="row row-cols-4 row-cols-md-2 g-4" id="dogs-list">
-            <!--리스트들어갈곳-->
-        </div>
-    </div>
-</div>
-<div class="nav3_content">
-<div class="inner">
-
-</div></div>
-    <div class="nav4_content">
-        <div class="container">
-            <button type="button" onclick="openClose()" class="btn btn-submit btn-primary">후기작성</button>
-
-            <div id="review-form" class="review-form">
-                <div class="mb-3">
-                    <label class="form-label">작성자</label>
-                    <input id="nickname" type="email" class="form-control"
-                           placeholder="별칭을 입력하세요.">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">제목</label>
-                    <input id="title" type="title" class="form-control"
-                           placeholder="30자 이내로 입력하세요.">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">review</label>
-                    <textarea id="comment" class="form-control" rows="3"></textarea>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">비밀번호를 입력하세요. 비밀번호는 작성된 후기를 수정 혹은 삭제할 때 사용됩니다.</label>
-                    <input id="password" type="password" class="form-control">
-                </div>
-                <button onclick="makeList()" type="button" class="btn upload btn-primary">등록</button>
-            </div>
-
-            <div id="list">
-                <!--후기추가될부분-->
-            </div>
-        </div>
-    </div>
 </body>
 </html>
