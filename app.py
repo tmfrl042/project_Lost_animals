@@ -33,11 +33,11 @@ def view_center():
     return jsonify({'bohocenters': bohocenter})
 
 
-# app1.py & app2.py
-"""
+# app1.py & app2.py & app3.py
+
 db.bohocenter.remove({})
 db.dogs.remove({})
-
+db.blogs.remove({})
 # 내가 받은 인증키
 mykey = "63b2c36d704e439dbcb63c3368650bb9"
 # 요청주소
@@ -103,11 +103,9 @@ for i in range(1, pageNum-2):
             animalList.append(number)
             db.dogs.insert_one(dogsDict)
     print(str(i)+"페이지db에저장성공")
-"""
-# app3.py
-"""
+
 # 브라우져 오픈
-chromedriver="C:/LSW/PYDATAexam/Webdriver/chromedriver"
+chromedriver="C:/chromedriver/chromedriver.exe"
 driver=webdriver.Chrome(chromedriver)
 headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
 
@@ -124,10 +122,10 @@ index_list=list(range(0,len(title_list)))
 # 원하는 검색어를 이용하면 원하는 내용의 블로그 검색이 가능합니다.
 text = "유기견 보호소"
 
-for i in range(1, 3):  # 1~(n-1)페이지까지의 블로그 내용을 읽어옴
-    url = 'https://section.blog.naver.com/Search/Post.nhn?pageNo=' + str(
-        i) + '&rangeType=ALL&orderBy=sim&keyword=' + text
-    driver.get(url)
+for a in range(1, 3):  # 1~(n-1)페이지까지의 블로그 내용을 읽어옴
+    curl = 'https://section.blog.naver.com/Search/Post.nhn?pageNo=' + str(
+        a) + '&rangeType=ALL&orderBy=sim&keyword=' + text
+    driver.get(curl)
     time.sleep(1)
     # 한 페이지당 7개의 블로그 창이 뜨기때문에 페이지마다 7개의 데이터를 크롤링 해옵니다.
     for j in range(0, 7):
@@ -167,18 +165,14 @@ print("url 수집 끝, 해당 url 데이터 크롤링")
 
 # 네이버 블로그를 통한 사진 url 저장을 해보니 불가능해서 다른 곳에서 크롤링을 시도해보았습니다.(구글링 코드 수정함)
 # 필요한 패키지 import 위에서부터 하나하나 실행하면 문제없이 작동하는 것 같습니다.
-from bs4 import BeautifulSoup
-from selenium import webdriver
-import time
 
-chromedriver="C:/LSW/PYDATAexam/Webdriver/chromedriver"
-driver=webdriver.Chrome(chromedriver)
+
 text2="유기견 강아지"
 driver.get("https://search.naver.com/search.naver?sm=tab_hty.top&where=image&query="+text2) # 여기에 URL을 넣어주세요
 time.sleep(3)
 
-req = driver.page_source
-soup = BeautifulSoup(req, 'html.parser')
+req1 = driver.page_source
+soup = BeautifulSoup(req1, 'html.parser')
 thumbnails = soup.select('div > div.thumb > a > img')
 
 for thumbnail in thumbnails[0:len(title_list)]:
@@ -187,8 +181,8 @@ for thumbnail in thumbnails[0:len(title_list)]:
 print(len(img_url_list))
 
 # 수집한 url마다 들어갑니다.
-for url in url_list: # 수집한 url 만큼 반복
-    driver.get(url) # 해당 url로 이동
+for curl in url_list: # 수집한 url 만큼 반복
+    driver.get(curl) # 해당 url로 이동
     driver.switch_to.frame('mainFrame') # 찾아봐도 이해가 안되는 내용, 그냥 크롤링이 불가능 하므로 id가 mainframe인 창으로 이동하고
     # 본문의 내용을 찾아서
     overlays = ".se-main-container"
@@ -201,14 +195,11 @@ print("본문 내용 수집이 완료되었습니다.")
 
 
 # MONGO DB에 저장합니다.
-client = MongoClient('localhost', 27017)
-# 이름이 db_animal인 DB를 이용합니다 없다면 만듭니다.
-db = client.animalLost
-for i in list(range(0,len(title_list))):
-    doc={'title': title_list[i],'url':url_list[i],'writer': writer_list[i], 'content': content_list[i],'date':date_list[i],'img_url':img_url_list[i]}
+for a in list(range(0,len(title_list))):
+    doc={'title': title_list[a],'url':url_list[a],'writer': writer_list[a], 'content': content_list[a],'date':date_list[a],'img_url':img_url_list[a]}
     db.blogs.insert_one(doc)# blogs라는 collections에 데이터들을 저장합니다. 끝!
+print("적재완료")
 
-"""
 
 # nav2-content
 # API 역할을 하는 부분
