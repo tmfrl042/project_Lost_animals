@@ -2,6 +2,7 @@
 $(document).ready(function () {
     showCenter();
     showDogs().hide();
+    showBlog().hide();
     showList().hide();
     tab_acv();
     $('.nav2-content').hide();
@@ -135,7 +136,42 @@ function showDogs() {
 }
 
 // nav3-content
+        function showBlog() {
+            $.ajax({
+                type: 'GET',
+                url: '/blog',
+                data: {},
+                success: function (response) {
+                    let blogs = response['blog_texts']
+                    for (let i = 0; i < blogs.length; i++) {
+                        let title = blogs[i]['title']
+                        let url=blogs[i]['url']
+                        let writer = blogs[i]['writer']
+                        let content = blogs[i]['content']
+                        let date = blogs[i]['date']
+                        let img_url = blogs[i]['img_url']
+                        let temp_html=`<div class="card blog mb-3" style="max-width: 1200px;">
+        <div class="row g-0">
+            <div class="col-md-2">
+                <img src=${img_url} class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-10">
+                <div class="card-body">
+                    <a href="${url}"><h5 class="card-title text-primary hrefs">${title}</h5></a>
+                    <h6 class="card-subtitle mb-2 text-muted publisher">published by ${writer}</h6>
+                    <a href="${url}"><p class="card-text description hrefs">${content}</p></a>
+                    <p class="card-text date"><small class="text-muted">${date}</small></p>
+                </div>
+            </div>
+        </div>
+    </div>`
+$('.inner').append(temp_html)
+                    }
 
+                }
+
+            })
+        }
 // nav4-content
 
 

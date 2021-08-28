@@ -73,22 +73,50 @@ img {
 
 
 /*nav3-content*/
-.blog:first-child {
-    margin-top: 130px;
-}
+       .inner {
+            width: 1000px;
+            margin: 0 auto;
+        }
 
-.description {
-    /*white-space: nowrap;*/
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2; /* 라인수 */
-    -webkit-box-orient: vertical;
-    word-wrap: break-word;
-    line-height: 1.2em;
-    height: 2.4em;
-}
+        .nav {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 30px;
+            margin-right: 200px;
 
+        }
+
+        .nav .item {
+            margin-right: 8px;
+        }
+
+        .blog:first-child {
+            margin-top: 130px;
+        }
+
+        .description {
+            /*white-space: nowrap;*/
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* 라인수 */
+            -webkit-box-orient: vertical;
+            word-wrap: break-word;
+            line-height: 1.2em;
+            height: 2.4em;
+        }
+        .imgs{
+            height: 159.6px;
+            width: 150px;
+            background-size: cover;
+            background-position:center;
+        }
+
+.hrefs{
+  color: black;
+  text-decoration: none;
+    text-underline: none;
+}
 
 /*nav4-content*/
 #review-form {
