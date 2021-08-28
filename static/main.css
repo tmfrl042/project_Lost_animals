@@ -36,7 +36,6 @@ body::after {
 }
 
 .btn-nav.acv{
-    /*스타일추가필요*/
 }
 
 
@@ -73,50 +72,22 @@ img {
 
 
 /*nav3-content*/
-       .inner {
-            width: 1000px;
-            margin: 0 auto;
-        }
-
-        .nav {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 30px;
-            margin-right: 200px;
-
-        }
-
-        .nav .item {
-            margin-right: 8px;
-        }
-
-        .blog:first-child {
-            margin-top: 130px;
-        }
-
-        .description {
-            /*white-space: nowrap;*/
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2; /* 라인수 */
-            -webkit-box-orient: vertical;
-            word-wrap: break-word;
-            line-height: 1.2em;
-            height: 2.4em;
-        }
-        .imgs{
-            height: 159.6px;
-            width: 150px;
-            background-size: cover;
-            background-position:center;
-        }
-
-.hrefs{
-  color: black;
-  text-decoration: none;
-    text-underline: none;
+.blog:first-child {
+    margin-top: 130px;
 }
+
+.description {
+    /*white-space: nowrap;*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* 라인수 */
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    line-height: 1.2em;
+    height: 2.4em;
+}
+
 
 /*nav4-content*/
 #review-form {
@@ -168,3 +139,8 @@ img {
 #list {
     margin-bottom: 100px;
 }
+
+.wrap .tab_cont .nav_content {
+    display: none;
+}
+.wrap .tab_cont{}

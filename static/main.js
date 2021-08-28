@@ -1,16 +1,22 @@
 // 공통
 $(document).ready(function () {
-    showCenter();
-    showDogs().hide();
-    showBlog().hide();
-    showList().hide();
-    tab_acv();
-    $('.nav2-content').hide();
-    $('.nav3-content').hide();
-    $('.nav4-content').hide();
 
+    $(".nav_content").hide();
+    $(".nav_content").eq(0).show();
+    $(".nav_btn_group button").click(function () {
+        $(".nav_btn_group button").removeClass("active")
+        $(this).addClass("active")
+        $(".nav_content").hide();
+        var tabid = $(this).attr("rel");
+        $("#" + tabid).fadeIn();
+    })
+    showCenter()
+    showDogs()
+    showBlog()
+    showList()
 
 });
+/*
 function tab_acv(){
     $('#nav1').on('click', function () {
         $('#nav1').addClass('acv')
@@ -54,9 +60,11 @@ function tab_acv(){
     })
 
 }
+*/
 
 // nav1-content
 function showCenter() {
+    $('#center-list').empty();
     $.ajax({
         type: 'GET',
         url: '/center',
@@ -68,30 +76,26 @@ function showCenter() {
                 let name = centers[i]['SHTER_NM']
                 let add = centers[i]['PROTECT_PLC']
                 let telno = centers[i]['SHTER_TELNO']
-
                 let temp_html = `<tr>
-                                    <td>${sigun}</td>
-                                    <td>${name}</td>
-                                    <td>${add}</td>
-                                    <td>${telno}</td>
-                                 </tr>`
-                $('#center-list').append(temp_html)
-            }
-        }
-    })
-}
+                                            <td>${sigun}</td>
+                                            <td>${name}</td>
+                                            <td>${add}</td>
+                                            <td>${telno}</td>
+                                        </tr>`
 
-function search() {
-    let address1 = $('#input-sido').val();
-    let address2 = $('#input-sigun').val();
-    $.ajax({
-        type: "POST",
-        url: "/center",
-        data: {address1_give: address1, address2_give: address2},
-        success: function (response) {
-            if (response["result"] == "success") {
-                alert(response["msg"]);
-                window.location.reload();
+                if ($('#input-sido').val() == "시/도" && $('#input-sigun').val() == "시/군/구") {
+                    $('#center-list').append(temp_html);
+                } else if ($('#input-sido').val() == "시/도") {
+                    alert("시나 도를 입력하세요");
+                    break;
+                } else if ($('#input-sido').val() == "경기도") {
+                    if ($('#input-sigun').val() == "시/군/구") {
+                        alert("시나 군,구를 입력하세요");
+                        break;
+                    } else if ($('#input-sigun').val() == sigun) {
+                        $('#center-list').append(temp_html);
+                    }
+                }
             }
         }
     })
@@ -99,8 +103,6 @@ function search() {
 
 
 // nav2-content
-
-
 function showDogs() {
     // 서버의 데이터 받아오기 (이미지경로,공고고유번호,품종,체중,발견장소,공고시작일자,종료일자)
     $.ajax({
@@ -136,21 +138,21 @@ function showDogs() {
 }
 
 // nav3-content
-        function showBlog() {
-            $.ajax({
-                type: 'GET',
-                url: '/blog',
-                data: {},
-                success: function (response) {
-                    let blogs = response['blog_texts']
-                    for (let i = 0; i < blogs.length; i++) {
-                        let title = blogs[i]['title']
-                        let url=blogs[i]['url']
-                        let writer = blogs[i]['writer']
-                        let content = blogs[i]['content']
-                        let date = blogs[i]['date']
-                        let img_url = blogs[i]['img_url']
-                        let temp_html=`<div class="card blog mb-3" style="max-width: 1200px;">
+function showBlog() {
+    $.ajax({
+        type: 'GET',
+        url: '/blog',
+        data: {},
+        success: function (response) {
+            let blogs = response['blog_texts']
+            for (let i = 0; i < blogs.length; i++) {
+                let title = blogs[i]['title']
+                let url = blogs[i]['url']
+                let writer = blogs[i]['writer']
+                let content = blogs[i]['content']
+                let date = blogs[i]['date']
+                let img_url = blogs[i]['img_url']
+                let temp_html = `<div class="card blog mb-3" style="max-width: 1200px;">
         <div class="row g-0">
             <div class="col-md-2">
                 <img src=${img_url} class="img-fluid rounded-start" alt="...">
@@ -165,24 +167,23 @@ function showDogs() {
             </div>
         </div>
     </div>`
-$('.inner').append(temp_html)
-                    }
+                $('.inner').append(temp_html)
+            }
 
-                }
-
-            })
         }
+
+    })
+}
+
 // nav4-content
-
-
 function openClose() {
-    if ($("#form").css("display") == "block") {
-        $("#form").hide();
-        $(".submit").text('후기작성');
+    if ($("#review-form").css("display") == "block") {
+        $("#review-form").hide();
+        $(".btn-submit").text('후기작성');
 
     } else {
-        $("#form").show();
-        $(".submit").text('접어두기');
+        $("#review-form").show();
+        $(".btn-submit").text('접어두기');
     }
 }
 
@@ -209,7 +210,7 @@ function makeList() {
         data: {nickname_give: nickname, title_give: title, comment_give: comment, password_give: password},
         success: function (response) {
             alert(response["msg"]);
-            window.location.reload();
+            showList()
         }
     })
 }
@@ -258,7 +259,6 @@ function showList() {
                 $('#list').append(temp_html)
             }
         }
-
     })
 }
 
