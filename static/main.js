@@ -159,9 +159,9 @@ function showBlog() {
             </div>
             <div class="col-md-10">
                 <div class="card-body">
-                    <a href="${url}"><h5 class="card-title text-primary hrefs">${title}</h5></a>
+                    <a href="${url}" target="_blank" ><h5 class="card-title text-primary hrefs">${title}</h5></a>
                     <h6 class="card-subtitle mb-2 text-muted publisher">published by ${writer}</h6>
-                    <a href="${url}"><p class="card-text description hrefs">${content}</p></a>
+                    <a href="${url}" target="_blank" ><p class="card-text description hrefs">${content}</p></a>
                     <p class="card-text date"><small class="text-muted">${date}</small></p>
                 </div>
             </div>
