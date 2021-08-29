@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb4f7364-fedb-42d1-805d-aa210a576440" name="Changes" comment="">
+    <list default="true" id="89e0044b-2e7e-4f04-b9cc-057ab35b3d20" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/project_Lost_animals.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/project_Lost_animals.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_db_0827.ipynb" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,7 +17,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1xLwtzyglvBb8asAxjnDc1VkvJG" />
+  <component name="ProjectId" id="1xOPnzXlfJyzUBRRuTNKx9WwEzS" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -28,12 +27,6 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="node.js.detected.package.eslint" value="true" />
-    <property name="node.js.detected.package.tslint" value="true" />
-    <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager" selected="Flask server.Flask (app.py)">
     <configuration name="project_Lost_animals" type="PythonConfigurationType" factoryName="Python">
@@ -82,15 +75,12 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="eb4f7364-fedb-42d1-805d-aa210a576440" name="Changes" comment="" />
-      <created>1630147896859</created>
+      <changelist id="89e0044b-2e7e-4f04-b9cc-057ab35b3d20" name="Changes" comment="" />
+      <created>1630223333132</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1630147896859</updated>
-      <workItem from="1630147902794" duration="1301000" />
-      <workItem from="1630150614820" duration="40000" />
-      <workItem from="1630154936383" duration="923000" />
-      <workItem from="1630157585580" duration="178000" />
+      <updated>1630223333132</updated>
+      <workItem from="1630223337987" duration="658000" />
     </task>
     <servers />
   </component>
@@ -98,6 +88,6 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/project_Lost_animals$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1630155002760" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/project_Lost_animals$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1630223903617" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>
