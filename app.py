@@ -1,17 +1,18 @@
-from pymongo import MongoClient
 from flask import Flask, render_template, jsonify, request
+from bson.objectid import ObjectId
+from pymongo import MongoClient
 import requests
 from bs4 import BeautifulSoup
-import xmltodict
+#import xmltodict
 import json
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
+#from selenium import webdriver
+#from selenium.webdriver.common.keys import Keys
 import time
 from bs4 import BeautifulSoup
-import sys
-import os
-import pandas as pd
-import numpy as np
+#import sys
+#import os
+#import pandas as pd
+#import numpy as np
 
 app = Flask(__name__)
 
@@ -32,7 +33,7 @@ def view_center():
     bohocenter = list(db.bohocenter.find({}, {'_id': False}))
     return jsonify({'bohocenters': bohocenter})
 
-
+"""
 # # app1.py & app2.py & app3.py
 #
 # db.bohocenter.remove({})
@@ -200,7 +201,7 @@ def view_center():
 #     db.blogs.insert_one(doc)# blogs라는 collections에 데이터들을 저장합니다. 끝!
 # print("적재완료")
 #
-
+"""
 # nav2-content
 # API 역할을 하는 부분
 @app.route('/dogs', methods=['GET'])
@@ -215,7 +216,7 @@ def read_blogs():
     blogs=list(db.blogs.find({},{'_id':False}))
     return jsonify({'blog_texts': blogs})
 
-
+"""
 def blog_crawler():
     # 브라우져 오픈
     chromedriver = "C:/LSW/PYDATAexam/Webdriver/chromedriver"
@@ -315,6 +316,7 @@ def blog_crawler():
         db.blogs.insert_one(doc)  # blogs라는 collections에 데이터들을 저장합니다. 끝!
 
 blog_crawler();
+"""
 # nav4-content
 ## 적재된 후기를 DB에서 불러오는 부분
 @app.route('/review', methods=['GET'])
@@ -374,18 +376,17 @@ def update():
     return jsonify({'msg': '실패!'})
 
 
-# @app.route('/delete', methods=['POST'])
-# def delete():
-#     print(request.form)
-#     id = request.form['id_give']
-#     password = request.form['password_give']
-#     # data = db.reviews.find_one({'_id': id})
-#     print(id)
-#     print(password)
-#     # if password == data['password']:
-#     #     # db.reviews.update_one({'name': name_receive}, {'$set': {'like': new_like}})
-#     #     return jsonify({'msg': '성공!'})
-#     return jsonify({'msg': '실패!'})
+@app.route('/delete', methods=['POST'])
+def delete():
+    print("삭제진입")
+    id = request.form['id_give']
+    password = request.form['confirmPassword_give']
+
+    print(id)
+    print(password)
+    db.reviews.delete_one({'_id': ObjectId(id)})
+
+    return jsonify({'msg': '삭제성공!'})
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True, use_reloader=False)

@@ -221,6 +221,7 @@ function showList() {
         url: "/review",
         data: {},
         success: function (response) {
+            $('#list').empty()
             let reviews = response['all_reviews']
             for (let i = 0; i < reviews.length; i++) {
                 let id = reviews[i]['id']
@@ -240,7 +241,7 @@ function showList() {
                                              <button id="more_openClose" onclick="reviewMore()" class="btn btn-more btn-light">전체글 보기</a>
                                              <button type="button" onclick="reviewUpdate('modify','${id}')" class="btn btn-modify btn-light">수정</button>
                                              <button type="button" onclick="reviewUpdate('delete','${id}')" class="btn btn-delete btn-light">삭제</button>
-                                         <div id="pw_confirm">
+                                         <div id="${id}-pw_confirm" class="pw-box">
                                              <div class="p-2">
                                                 <label class="col-form-label">비밀번호</label>
                                              </div>
@@ -264,18 +265,18 @@ function showList() {
 
 function reviewUpdate(type, id) {
     let targetUrl;
-    if ($("#pw_confirm").is(':visible') == true) {
-        $("#pw_confirm").hide();
-        $("#pw_confirm").removeClass('d-flex')
+    if ($(`#${id}-pw_confirm`).is(':visible') == true) {
+        $(`#${id}-pw_confirm`).hide();
+        $(`#${id}-pw_confirm`).removeClass('d-flex')
     } else {
-        $("#pw_confirm").show();
-        $("#pw_confirm").addClass('d-flex')
+        $(`#${id}-pw_confirm`).show();
+        $(`#${id}-pw_confirm`).addClass('d-flex')
     }
     if (type == "modify") {
-        alert('이건 ' + id + ' 수정')
+
         targetUrl = "/update"
     } else if (type == "delete") {
-        alert('이건 ' + id + ' 삭제')
+
         targetUrl = "/delete"
 
     }
@@ -286,13 +287,13 @@ function reviewUpdate(type, id) {
 }
 
 function reviewUpdateTransac(id, targetUrl) {
+    console.log("reviewUpdateTransac")
     let confirmPassword = $('#pwd_confirm').val()
     $.ajax({
         type: "POST",
         url: targetUrl,
         data: {id_give: id, confirmPassword_give: confirmPassword},
         success: function (response) {
-            alert(response["msg"]);
             window.location.reload();
         }
     })
