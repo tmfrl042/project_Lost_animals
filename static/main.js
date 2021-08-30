@@ -288,11 +288,13 @@ function reviewUpdate(type, id) {
 
 function reviewUpdateTransac(id, targetUrl) {
     let confirmPassword =  $(`#${id}-pwd_confirm`).val()
+    let reviseContent = $(`#${id}-edit_area`).val()
     console.log(confirmPassword)
+    console.log(reviseContent)
     $.ajax({
         type: "POST",
         url: targetUrl,
-        data: {id_give: id, confirmPassword_give: confirmPassword},
+        data: {id_give: id, confirmPassword_give: confirmPassword, reviseContent_give: reviseContent},
         success: function (response) {
             alert(response["msg"]);
             showList();
@@ -312,6 +314,5 @@ function startEdit(id){
         $(`#${id}-edit_area`).hide();
         $(`.${id}-btn-modify`).text("수정");
     }
-
 
 }

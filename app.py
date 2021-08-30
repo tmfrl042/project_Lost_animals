@@ -84,16 +84,28 @@ def saving():
 # 후기 수정, 삭제 버튼 클릭 시 DB저장된 ID와 입력한 아이디가 같으면 update, delete 하는 부분
 @app.route('/update', methods=['POST'])
 def update():
-    print(request.form)
+    print("수정진입")
     id = request.form['id_give']
+    reviseContent = request.form['reviseContent_give']
     confirmPassword = request.form['confirmPassword_give']
-    # data = db.reviews.find_one({'_id': id})
+
     print(id)
     print(confirmPassword)
-    # if confirmPassword == data['password']:
-    #     db.reviews.update_one({'nickname': nickname_receive}, {'$set': {'like': new_like}})
-    #     return jsonify({'msg': '성공!'})
-    return jsonify({'msg': '실패!'})
+    print(reviseContent)
+
+    data = db.reviews.find_one({'_id': ObjectId(id)})
+    currentPassword = data['password']
+    originContent = data['comment']
+
+    print(data)
+    print(currentPassword)
+    print(originContent)
+
+    if currentPassword != confirmPassword:
+        return jsonify({'msg': '비밀번호가 일치하지 않습니다. 다시 입력해주세요!'})
+    else:
+        db.reviews.update_one({'_id': ObjectId(id)}, {'$set': {'comment': reviseContent} })
+        return jsonify({'msg': '수정되었습니다.'})
 
 
 @app.route('/delete', methods=['POST'])
