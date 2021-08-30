@@ -8,7 +8,7 @@ body::after {
     width: 100%;
     height: 100%;
     content: "";
-    background-image: url("../static/images/check2.jpeg");
+    background-image: url("images/bgi.jpeg");
     background-size: contain;
     background-repeat: repeat;
     position: fixed;
