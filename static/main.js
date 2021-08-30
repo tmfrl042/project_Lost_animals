@@ -153,20 +153,20 @@ function showBlog() {
                 let date = blogs[i]['date']
                 let img_url = blogs[i]['img_url']
                 let temp_html = `<div class="card blog mb-3" style="max-width: 1200px;">
-        <div class="row g-0">
-            <div class="col-md-2">
-                <img src=${img_url} class="img-fluid rounded-start" alt="...">
-            </div>
-            <div class="col-md-10">
-                <div class="card-body">
-                    <a href="${url}" target="_blank" ><h5 class="card-title text-primary hrefs">${title}</h5></a>
-                    <h6 class="card-subtitle mb-2 text-muted publisher">published by ${writer}</h6>
-                    <a href="${url}" target="_blank" ><p class="card-text description hrefs">${content}</p></a>
-                    <p class="card-text date"><small class="text-muted">${date}</small></p>
-                </div>
-            </div>
-        </div>
-    </div>`
+                                    <div class="row g-0">
+                                        <div class="col-md-2">
+                                            <img src=${img_url} class="img-fluid rounded-start" alt="...">
+                                        </div>
+                                        <div class="col-md-10">
+                                            <div class="card-body">
+                                                <a href="${url}" target="_blank" ><h5 class="card-title text-warning hrefs">${title}</h5></a>
+                                                <h6 class="card-subtitle mb-2 text-muted publisher">published by ${writer}</h6>
+                                                <a href="${url}" target="_blank" ><p class="card-text text-dark description hrefs">${content}</p></a>
+                                                <p class="card-text date"><small class="text-muted">${date}</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`
                 $('.inner').append(temp_html)
             }
 
@@ -189,10 +189,10 @@ function openClose() {
 
 function reviewMore() {
     if ($(".description").is(':visible') == true) {
-        $("#description").removeClass('description')
+        $(`#${id}-description`).removeClass('description')
         $("#more_openClose").text("닫기");
     } else {
-        $("#description").addClass('description');
+        $(`#${id}-description`).addClass('description');
         $("#more_openClose").text("전체글 보기");
     }
 
@@ -211,6 +211,7 @@ function makeList() {
         success: function (response) {
             alert(response["msg"]);
             showList()
+            window.location.reload();
         }
     })
 }
@@ -221,7 +222,9 @@ function showList() {
         url: "/review",
         data: {},
         success: function (response) {
-            $('#list').empty()
+            $('#list').empty();
+            $("#review-form").hide();
+
             let reviews = response['all_reviews']
             for (let i = 0; i < reviews.length; i++) {
                 let id = reviews[i]['id']
@@ -236,26 +239,28 @@ function showList() {
                                             <h6 class="card-subtitle mb-2 text-muted name">by ${nickname}</h6>
                                          </div>
 
-                                         <p id="description" class="card-text description">${comment}</p>
+                                         <p id="${id}-description" class="card-text description">${comment}</p>
+                                         
                                          <div class="btnGroup d-flex align-items-center">
                                              <button id="more_openClose" onclick="reviewMore()" class="btn btn-more btn-light">전체글 보기</a>
                                              <button type="button" onclick="reviewUpdate('modify','${id}')" class="btn btn-modify btn-light">수정</button>
                                              <button type="button" onclick="reviewUpdate('delete','${id}')" class="btn btn-delete btn-light">삭제</button>
-                                         <div id="${id}-pw_confirm" class="pw-box">
-                                             <div class="p-2">
-                                                <label class="col-form-label">비밀번호</label>
-                                             </div>
-                                             <div class="p-2">
-                                                 <input type="password" id="pwd_confirm" class="form-control" aria-describedby="passwordHelpInline">
-                                             </div>
-                                             <div class="p-2">
-                                                 <button type="button" id="pw_confirm_btn" class="btn btn-confirm btn-warning">확인</button>
-                                             </div>
-                                         </div>
-                                      </div>
+                                            
+                                                <div id="${id}-pw_confirm" class="pw-box">
+                                                     <div class="p-2">
+                                                        <label class="col-form-label">비밀번호</label>
+                                                     </div>
+                                                     <div class="p-2">
+                                                         <input type="password" id="pwd_confirm" class="form-control" aria-describedby="passwordHelpInline">
+                                                     </div>
+                                                     <div class="p-2">
+                                                         <button type="button" id="pw_confirm_btn" class="btn btn-confirm btn-warning">확인</button>
+                                                     </div>
+                                                </div>
+                                        </div>
 
                                      </div>
-                                  </div>`
+                                   </div>`
 
                 $('#list').append(temp_html)
             }
@@ -294,6 +299,7 @@ function reviewUpdateTransac(id, targetUrl) {
         url: targetUrl,
         data: {id_give: id, confirmPassword_give: confirmPassword},
         success: function (response) {
+            alert(response["msg"]);
             window.location.reload();
         }
     })

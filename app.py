@@ -95,13 +95,27 @@ def update():
 def delete():
     print("삭제진입")
     id = request.form['id_give']
-    password = request.form['confirmPassword_give']
+    confirmPassword = request.form['confirmPassword_give']
 
     print(id)
-    print(password)
-    db.reviews.delete_one({'_id': ObjectId(id)})
+    print(confirmPassword)
 
-    return jsonify({'msg': '삭제성공!'})
+    data = db.reviews.find_one({'_id': ObjectId(id)})
+    currentPassword = data['password']
+
+    print(data)
+    print(currentPassword)
+
+    if currentPassword != confirmPassword:
+        return jsonify({'msg': '비밀번호가 일치하지 않습니다. 다시 입력해주세요!'})
+    else:
+        db.reviews.delete_one({'_id': ObjectId(id)})
+        return jsonify({'msg': '삭제되었습니다.'})
+
+
+
+
+
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True, use_reloader=False)
