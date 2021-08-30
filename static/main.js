@@ -159,10 +159,10 @@ function showBlog() {
                 let img_url = blogs[i]['img_url']
                 let temp_html = `<div class="card blog mb-3" style="max-width: 1100px;">
                                     <div class="row g-0">
-                                        <div class="col-md-2">
+                                        <div class="col-md-3">
                                             <img src=${img_url} class="blog_img img-fluid rounded-start" alt="...">
                                         </div>
-                                        <div class="col-md-10">
+                                        <div class="col-md-9">
                                             <div class="card-body">
                                                 <a href="${url}" target="_blank" ><h5 class="card-title text-warning hrefs">${title}</h5></a>
                                                 <h6 class="card-subtitle mb-2 text-muted publisher">published by ${writer}</h6>

@@ -1,7 +1,7 @@
 /*공통*/
 body {
     font-family: 'IBM Plex Sans KR', sans-serif;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 body::after {
@@ -78,7 +78,7 @@ img {
 }
 
 /*nav2-content*/
-.row {
+.dog_row {
     display: flex;
     flex-wrap: wrap;
     column-count: 4;
@@ -112,7 +112,8 @@ img {
 
 .blog_img {
     display: block;
-    width: 400px;
+    height: 250px;
+    object-fit: cover;
 }
 
 .blog:first-child {
@@ -123,11 +124,11 @@ img {
     /*white-space: nowrap;*/
     overflow: scroll;
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* 라인수 */
-    -webkit-box-orient: vertical;
+    /*-webkit-line-clamp: 2; !* 라인수 *!*/
+    /*-webkit-box-orient: vertical;*/
     word-wrap: break-word;
-    line-height: 1.2em;
-    height: 4.8em;
+    line-height: 1.5em;
+    height: 8.0em;
 }
 
 
