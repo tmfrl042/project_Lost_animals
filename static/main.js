@@ -10,10 +10,15 @@ $(document).ready(function () {
         var tabid = $(this).attr("rel");
         $("#" + tabid).fadeIn();
     })
+
     showCenter()
     showDogs()
     showBlog()
     showList()
+
+    var link = document.location.href;  //현재 접속 url
+    var tab = link.split('/').pop();   //배열의 맨 마지막 요소를 삭제하고 삭제된 해당 값을 반환함
+    $('a[href$=' + tab + ']').trigger("click"); //해당 앵커 트리거를이용 클릭 이벤트
 
 });
 /*
