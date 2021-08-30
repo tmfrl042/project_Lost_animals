@@ -157,10 +157,10 @@ function showBlog() {
                 let content = blogs[i]['content']
                 let date = blogs[i]['date']
                 let img_url = blogs[i]['img_url']
-                let temp_html = `<div class="card blog mb-3" style="max-width: 1200px;">
+                let temp_html = `<div class="card blog mb-3" style="max-width: 1100px;">
                                     <div class="row g-0">
                                         <div class="col-md-2">
-                                            <img src=${img_url} class="img-fluid rounded-start" alt="...">
+                                            <img src=${img_url} class="blog_img img-fluid rounded-start" alt="...">
                                         </div>
                                         <div class="col-md-10">
                                             <div class="card-body">
@@ -192,16 +192,6 @@ function openClose() {
     }
 }
 
-function reviewMore() {
-    if ($(".description").is(':visible') == true) {
-        $(`#${id}-description`).removeClass('description')
-        $("#more_openClose").text("닫기");
-    } else {
-        $(`#${id}-description`).addClass('description');
-        $("#more_openClose").text("전체글 보기");
-    }
-
-}
 
 function makeList() {
     let nickname = $('#nickname').val()
@@ -216,7 +206,6 @@ function makeList() {
         success: function (response) {
             alert(response["msg"]);
             showList()
-            window.location.reload();
         }
     })
 }
@@ -245,21 +234,21 @@ function showList() {
                                          </div>
 
                                          <p id="${id}-description" class="card-text description">${comment}</p>
-                                         
+                                         <textarea name="" id="${id}-edit_area" class="edit_area" cols="20" rows="10"></textarea>                                    
                                          <div class="btnGroup d-flex align-items-center">
-                                             <button id="more_openClose" onclick="reviewMore()" class="btn btn-more btn-light">전체글 보기</a>
-                                             <button type="button" onclick="reviewUpdate('modify','${id}')" class="btn btn-modify btn-light">수정</button>
-                                             <button type="button" onclick="reviewUpdate('delete','${id}')" class="btn btn-delete btn-light">삭제</button>
+<!--                                             <button id="more_openClose" onclick="reviewMore()" class="btn btn-more btn-light">전체글 보기</a>-->
+                                             <button type="button" onclick="reviewUpdate('modify','${id}')" class="btn ${id}-btn-modify btn-light">수정</button>
+                                             <button type="button" onclick="reviewUpdate('delete','${id}')" class="btn ${id}-btn-delete btn-light">삭제</button>
                                             
                                                 <div id="${id}-pw_confirm" class="pw-box">
                                                      <div class="p-2">
                                                         <label class="col-form-label">비밀번호</label>
                                                      </div>
                                                      <div class="p-2">
-                                                         <input type="password" id="pwd_confirm" class="form-control" aria-describedby="passwordHelpInline">
+                                                         <input type="password" id="${id}-pwd_confirm" class="form-control" aria-describedby="passwordHelpInline">
                                                      </div>
                                                      <div class="p-2">
-                                                         <button type="button" id="pw_confirm_btn" class="btn btn-confirm btn-warning">확인</button>
+                                                         <button type="button" id="${id}-pw_confirm_btn" class="btn btn-confirm btn-warning ">확인</button>
                                                      </div>
                                                 </div>
                                         </div>
@@ -274,7 +263,7 @@ function showList() {
 }
 
 function reviewUpdate(type, id) {
-    let targetUrl;
+    let targetUrl =''
     if ($(`#${id}-pw_confirm`).is(':visible') == true) {
         $(`#${id}-pw_confirm`).hide();
         $(`#${id}-pw_confirm`).removeClass('d-flex')
@@ -282,30 +271,47 @@ function reviewUpdate(type, id) {
         $(`#${id}-pw_confirm`).show();
         $(`#${id}-pw_confirm`).addClass('d-flex')
     }
+
     if (type == "modify") {
-
         targetUrl = "/update"
+        startEdit(id)
+
     } else if (type == "delete") {
-
         targetUrl = "/delete"
-
     }
 
-    $("#pw_confirm_btn").click(function () {
+    $(`#${id}-pw_confirm_btn`).click(function () {
         reviewUpdateTransac(id, targetUrl)
+        return;
     })
 }
 
 function reviewUpdateTransac(id, targetUrl) {
-    console.log("reviewUpdateTransac")
-    let confirmPassword = $('#pwd_confirm').val()
+    let confirmPassword =  $(`#${id}-pwd_confirm`).val()
+    console.log(confirmPassword)
     $.ajax({
         type: "POST",
         url: targetUrl,
         data: {id_give: id, confirmPassword_give: confirmPassword},
         success: function (response) {
             alert(response["msg"]);
-            window.location.reload();
+            showList();
         }
     })
+}
+
+function startEdit(id){
+    let originContent = $(`#${id}-description`).text();
+    if ($(`#${id}-edit_area`).css("display") == "none"){
+        $(`#${id}-description`).hide();
+        $(`#${id}-edit_area`).show();
+        $(`#${id}-edit_area`).val(originContent);
+        $(`.${id}-btn-modify`).text("닫기");
+    } else {
+        $(`#${id}-description`).show();
+        $(`#${id}-edit_area`).hide();
+        $(`.${id}-btn-modify`).text("수정");
+    }
+
+
 }

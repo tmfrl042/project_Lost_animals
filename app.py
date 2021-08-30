@@ -4,13 +4,15 @@ from pymongo import MongoClient
 
 app = Flask(__name__)
 
-client = MongoClient('localhost', 27017)
+client = MongoClient('mongodb://test:test@3.38.98.101', 27017)
 db = client.animalLost
+
 
 # HTML 화면 보여주기
 @app.route('/')
 def home():
     return render_template('index.html')
+
 
 # nav1-content
 # API 역할을 하는 부분
@@ -19,21 +21,24 @@ def view_center():
     bohocenter = list(db.bohocenter.find({}, {'_id': False}))
     return jsonify({'bohocenters': bohocenter})
 
+
 # nav2-content
 # API 역할을 하는 부분
 @app.route('/dogs', methods=['GET'])
 def view_abdogs():
-    dogs_notice = list(db.dogs.find({"SPECIES_NM": {'$regex': '개'}}, {'_id': False}))
+    dogs_notice = list(db.dogs.find({"SPECIES_NM": {'$regex': '개'}}, {'_id': False}).limit(30))
     return jsonify({'dogs_notices': dogs_notice})
+
 
 # nav3-content
 @app.route('/blog', methods=['GET'])
 def read_blogs():
-    blogs=list(db.blogs.find({},{'_id':False}))
+    blogs = list(db.blogs.find({}, {'_id': False}))
     return jsonify({'blog_texts': blogs})
 
+
 # nav4-content
-## 적재된 후기를 DB에서 불러오는 부분
+# 적재된 후기를 DB에서 불러오는 부분
 @app.route('/review', methods=['GET'])
 def getReview():
     data = list(db.reviews.find({}))
@@ -111,10 +116,6 @@ def delete():
     else:
         db.reviews.delete_one({'_id': ObjectId(id)})
         return jsonify({'msg': '삭제되었습니다.'})
-
-
-
-
 
 
 if __name__ == '__main__':
