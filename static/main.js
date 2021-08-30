@@ -216,7 +216,6 @@ function makeList() {
         success: function (response) {
             alert(response["msg"]);
             showList()
-            window.location.reload();
         }
     })
 }
@@ -245,7 +244,7 @@ function showList() {
                                          </div>
 
                                          <p id="${id}-description" class="card-text description">${comment}</p>
-                                         
+                                         <textarea name="" id="${id}-edit_area" class="edit_area" cols="20" rows="10"></textarea>                                    
                                          <div class="btnGroup d-flex align-items-center">
                                              <button id="more_openClose" onclick="reviewMore()" class="btn btn-more btn-light">전체글 보기</a>
                                              <button type="button" onclick="reviewUpdate('modify','${id}')" class="btn btn-modify btn-light">수정</button>
@@ -256,10 +255,10 @@ function showList() {
                                                         <label class="col-form-label">비밀번호</label>
                                                      </div>
                                                      <div class="p-2">
-                                                         <input type="password" id="pwd_confirm" class="form-control" aria-describedby="passwordHelpInline">
+                                                         <input type="password" id="${id}-pwd_confirm" class="form-control" aria-describedby="passwordHelpInline">
                                                      </div>
                                                      <div class="p-2">
-                                                         <button type="button" id="pw_confirm_btn" class="btn btn-confirm btn-warning">확인</button>
+                                                         <button type="button" id="${id}-pw_confirm_btn" class="btn btn-confirm btn-warning ">확인</button>
                                                      </div>
                                                 </div>
                                         </div>
@@ -274,7 +273,7 @@ function showList() {
 }
 
 function reviewUpdate(type, id) {
-    let targetUrl;
+    let targetUrl =''
     if ($(`#${id}-pw_confirm`).is(':visible') == true) {
         $(`#${id}-pw_confirm`).hide();
         $(`#${id}-pw_confirm`).removeClass('d-flex')
@@ -282,30 +281,40 @@ function reviewUpdate(type, id) {
         $(`#${id}-pw_confirm`).show();
         $(`#${id}-pw_confirm`).addClass('d-flex')
     }
+
     if (type == "modify") {
-
         targetUrl = "/update"
+        startEdit(id)
+
     } else if (type == "delete") {
-
         targetUrl = "/delete"
-
     }
 
-    $("#pw_confirm_btn").click(function () {
+    $(`#${id}-pw_confirm_btn`).click(function () {
         reviewUpdateTransac(id, targetUrl)
+        return;
     })
 }
 
 function reviewUpdateTransac(id, targetUrl) {
-    console.log("reviewUpdateTransac")
-    let confirmPassword = $('#pwd_confirm').val()
+    let confirmPassword =  $(`#${id}-pwd_confirm`).val()
+    console.log(confirmPassword)
     $.ajax({
         type: "POST",
         url: targetUrl,
         data: {id_give: id, confirmPassword_give: confirmPassword},
         success: function (response) {
             alert(response["msg"]);
-            window.location.reload();
+            showList();
         }
     })
+}
+
+function startEdit(id){
+    $(`#${id}-description`).hide();
+    $(`#${id}-edit_area`).show();
+    let originContent = $(`#${id}-description`).text();
+    console.log(originContent)
+    $(`#${id}-edit_area`).val(originContent)
+
 }

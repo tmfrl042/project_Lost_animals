@@ -19,7 +19,7 @@ body::after {
 }
 
 .container {
-    width: 1000px;
+    width: 90%;
     margin: 0 auto;
 }
 
@@ -74,8 +74,12 @@ body::after {
 
 /*nav2-content*/
 .row {
-    margin: auto;
-    width: 1000px;
+    display: flex;
+    flex-wrap: wrap;
+    column-count: 4;
+    gap: 10px;
+    justify-content: center;
+    width: 100%;
 }
 
 img {
@@ -179,4 +183,16 @@ img {
 .wrap .tab_cont{}
 .pw-box{
     display: none;
+}
+
+.edit_area{
+    display: none;
+    width: 80%;
+    height: 80px;
+    resize: none;
+    padding: 3px;
+    margin-bottom: -20px;
+
+    position: relative;
+    top:-12px;
 }
