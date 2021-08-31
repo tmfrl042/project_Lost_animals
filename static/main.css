@@ -25,9 +25,11 @@ body::after {
 
 .nav_btn_group {
     display: flex;
+    flex-wrap: nowrap;
     justify-content: flex-end;
     margin-top: 30px;
     margin-right: 200px;
+    width: 100%;
 
 }
 
@@ -39,9 +41,12 @@ body::after {
 }
 
 .title-box {
-    display: block;
+    display: flex;
     margin: 80px auto 60px auto;
     text-align: center;
+    width: 100%;
+    align-content: stretch;
+    justify-content: space-around;
 }
 
 img {
